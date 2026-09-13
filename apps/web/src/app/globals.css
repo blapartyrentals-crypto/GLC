@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+:root {
+  --glc-bg: #0b1220;
+  --glc-accent: #22d3ee;
+}
+
+body {
+  background: var(--glc-bg);
+  color: #e2e8f0;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}

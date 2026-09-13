@@ -1,0 +1,24 @@
+# Sovereign deployment profile — overrides
+profile: sovereign
+replicaCount: 2
+
+env:
+  GLC_PROFILE: sovereign
+  NODE_ENV: production
+
+autoscaling:
+  enabled: false
+
+networkPolicies:
+  enabled: true
+
+resources:
+  requests:
+    cpu: 200m
+    memory: 512Mi
+  limits:
+    cpu: "2"
+    memory: 2Gi
+
+# In sovereign deployments, everything above is constrained to the jurisdiction
+# and no external egress is enabled by default.
