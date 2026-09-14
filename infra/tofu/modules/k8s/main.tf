@@ -1,5 +1,5 @@
 # Module: Kubernetes-compatible cluster
-# In commercial: managed (EKS/GKE/AKS). In sovereign: on-prem / vSphere / bare-metal.
+# In commercial: managed (OVHcloud K8s). In sovereign: on-prem / vSphere / bare-metal.
 
 variable "name_prefix" {
   type = string

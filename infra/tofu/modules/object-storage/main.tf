@@ -1,4 +1,4 @@
-# Module: S3-compatible Object Storage (MinIO on-prem / managed bucket in cloud)
+# Module: S3-compatible Object Storage (MinIO on-prem / OVHcloud Object Storage)
 
 variable "name_prefix" {
   type = string

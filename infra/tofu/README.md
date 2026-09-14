@@ -24,7 +24,8 @@ infra/tofu/
 ## Uso
 
 ```bash
-# Perfil commercial (ej. AWS)
+# Perfil commercial (OVHcloud)
+# Credenciales: export OVH_APPLICATION_KEY OVH_APPLICATION_SECRET OVH_CONSUMER_KEY
 cd infra/tofu/environments/commercial
 tofu init
 tofu plan -var-file=commercial.tfvars

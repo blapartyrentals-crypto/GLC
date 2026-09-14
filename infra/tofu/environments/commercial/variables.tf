@@ -1,6 +1,7 @@
 variable "region" {
   type    = string
-  default = "us-east-1"
+  # OVHcloud regions: GRA (Gravelines), SBG (Strasbourg), WAW (Warsaw), BHS (Beauharnois), etc.
+  default = "GRA9"
 }
 
 variable "postgres_version" {

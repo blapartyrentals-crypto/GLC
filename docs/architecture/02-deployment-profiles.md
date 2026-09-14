@@ -17,7 +17,7 @@ Commercial   Institutional   Sovereign
 ## 2. Commercial / Pilot
 
 - **Objetivo:** validar producto, on-board de usuarios civiles, escala elástica.
-- **Compute:** managed (ECS/AKS/EKS/GKE o equivalente).
+- **Compute:** managed (OVHcloud Managed Kubernetes, AKS/EKS/GKE o equivalente).
 - **DB:** managed PostgreSQL (con `pgvector` y `row level security` habilitados).
 - **Cache/Jobs:** managed Redis/Valkey.
 - **Objetos:** managed S3-compatible + CDN/Edge.

@@ -5,8 +5,8 @@ terraform {
   required_version = ">= 1.6"
 
   # Uncomment when a remote backend is available per profile:
-  # backend "s3" { ... }   # commercial
-  # backend "local" { ... }# sovereign (or an on-prem-equivalent)
+  # backend "s3" { ... }    # any S3-compatible backend (AWS / OVHcloud Object Storage)
+  # backend "local" { ... } # sovereign (or an on-prem-equivalent)
 }
 
 variable "name_prefix" {
@@ -16,9 +16,9 @@ variable "name_prefix" {
 }
 
 variable "region" {
-  description = "Deployment region / jurisdiction"
+  description = "Deployment region / jurisdiction (OVHcloud: GRA9, SBG5, WAW1, ...)"
   type        = string
-  default     = "us-east-1"
+  default     = "GRA9"
 }
 
 variable "profile" {

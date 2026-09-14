@@ -1,19 +1,18 @@
 # Perfil Commercial / Pilot
-# Provider default de ejemplo: AWS. Se puede cambiar por el proveedor comercial elegido.
+# Provider: OVHcloud (EU data centres, S3-compatible Object Storage, managed K8s).
+# Credentials via OVH_APPLICATION_KEY / OVH_APPLICATION_SECRET / OVH_CONSUMER_KEY env vars.
 
 terraform {
   required_version = ">= 1.6"
   required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
+    ovh = {
+      source  = "ovh/ovh"
+      version = "~> 1.6"
     }
   }
 }
 
-provider "aws" {
-  region = var.region
-}
+provider "ovh" {}
 
 module "postgres" {
   source       = "../../modules/postgres"

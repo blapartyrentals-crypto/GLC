@@ -5,7 +5,7 @@ Un solo codebase, múltiples perfiles de despliegue (ADR-0002).
 | Perfil | Objetivo | Provisión | Orquestación |
 | --- | --- | --- | --- |
 | `local` | Dev en laptop | Docker Compose | — |
-| `commercial` | Piloto / SaaS | OpenTofu (AWS) | Helm |
+| `commercial` | Piloto / SaaS | OpenTofu (OVHcloud) | Helm |
 | `sovereign` | Institucional / defensa | OpenTofu (on-prem) | Helm |
 
 ## Primeros pasos (local)
