@@ -1,5 +1,5 @@
 # Perfil Commercial / Pilot
-# Provider: OVHcloud (EU data centres, S3-compatible Object Storage, managed K8s).
+# Provider: OVHcloud (US data centres, S3-compatible Object Storage, managed K8s).
 # Credentials via OVH_APPLICATION_KEY / OVH_APPLICATION_SECRET / OVH_CONSUMER_KEY env vars.
 
 terraform {
@@ -12,7 +12,9 @@ terraform {
   }
 }
 
-provider "ovh" {}
+provider "ovh" {
+  endpoint = var.ovh_endpoint
+}
 
 module "postgres" {
   source       = "../../modules/postgres"
