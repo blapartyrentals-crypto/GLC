@@ -1,0 +1,45 @@
+# GLC Helm values — defaults
+# Override per profile: <profile>.values.yaml (commercial / sovereign)
+
+profile: commercial  # commercial | institutional | sovereign
+region: ""
+
+image:
+  repository: glc/api
+  tag: "0.1.0"
+  pullPolicy: IfNotPresent
+
+replicaCount: 2
+
+service:
+  type: ClusterIP
+  port: 3000
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: "1"
+    memory: 1Gi
+
+env:
+  GLC_PROFILE: ""
+  NODE_ENV: production
+
+secrets:
+  # References pods to secrets made in OpenBao / K8s secrets. Never inline values.
+  existingSecret: ""
+
+autoscaling:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+
+ingress:
+  enabled: false
+  host: ""
+
+networkPolicies:
+  enabled: false

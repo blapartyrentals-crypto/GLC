@@ -1,0 +1,8 @@
+# LiteLLM Proxy config — local development.
+# In prod, model keys live in OpenBao / env, never in this file.
+model_list:
+  - model_name: glc-local-model
+    litellm_params:
+      model: openai/glc-local-model
+      api_base: http://host.docker.internal:11434/v1   # local inference (e.g. ollama) in dev
+      api_key: dummy

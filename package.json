@@ -1,0 +1,28 @@
+{
+  "name": "glc",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GLC (Global Life Change) — ONE codebase, multiple deployment profiles (Commercial / Institutional / Sovereign).",
+  "packageManager": "pnpm@12.4.1",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "clean": "turbo run clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@glc/tsconfig": "workspace:*",
+    "eslint": "^9.17.0",
+    "turbo": "^2.3.0",
+    "typescript": "^5.6.0",
+    "typescript-eslint": "^8.18.0",
+    "vitest": "^2.1.0"
+  },
+  "packageManagerNote": "Repository managed with pnpm workspaces. Run `corepack enable pnpm` to pin the manager."
+}

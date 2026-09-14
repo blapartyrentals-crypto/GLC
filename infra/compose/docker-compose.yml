@@ -1,0 +1,112 @@
+name: glc
+
+# GLC local development stack.
+# Purpose: replicate the core services of the platform locally for engineers.
+# Not a production topology — see infra/tofu + infra/helm for deployable profiles.
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: glc-postgres
+    environment:
+      POSTGRES_USER: glc
+      POSTGRES_PASSWORD: glc_dev
+      POSTGRES_DB: glc
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U glc -d glc"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  valkey:
+    image: valkey/valkey:8-alpine
+    container_name: glc-valkey
+    ports:
+      - "6379:6379"
+    volumes:
+      - valkeydata:/data
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  nats:
+    image: nats:2.10-alpine
+    container_name: glc-nats
+    command: ["-js", "-m", "8222"]
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O-", "http://localhost:8222/healthz"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  minio:
+    image: minio/minio:latest
+    container_name: glc-minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: glc
+      MINIO_ROOT_PASSWORD: glc_dev_minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - miniodata:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:25.0
+    container_name: glc-keycloak
+    command: start-dev
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin_dev
+      KC_DB_URL: jdbc:postgresql://postgres:5432/glc
+      KC_DB_USERNAME: glc
+      KC_DB_PASSWORD: glc_dev
+      KC_DB: postgres
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  openbao:
+    image: ghcr.io/openbao/openbao:2.0
+    container_name: glc-openbao
+    cap_add:
+      - IPC_LOCK
+    environment:
+      BAO_DEV_ROOT_TOKEN_ID: bao-dev-root
+    ports:
+      - "8200:8200"
+    volumes:
+      - baodata:/home/bao/data
+    command: server -dev
+
+  litellm:
+    image: ghcr.io/berriai/litellm:main-stable
+    container_name: glc-litellm
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./litellm-config.yaml:/app/config.yaml
+    command: ["--config", "/app/config.yaml", "--port", "4000"]
+
+volumes:
+  pgdata:
+  valkeydata:
+  miniodata:
+  baodata:

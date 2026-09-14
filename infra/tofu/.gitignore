@@ -1,0 +1,5 @@
+# OpenTofu — never commit provider binaries / modules cache / state / secrets
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
